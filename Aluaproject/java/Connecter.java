@@ -1,12 +1,10 @@
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
     public class Connecter {//main class for starting all services
         private final EntityManagerFactory managerFactory;
-        private EntityManager manager;
-        //    private final CustomerService customerService;
+        private EntityManager manager;//    private final CustomerService customerService;
 //    private final OrderService orderService;
         private final AccountService accountService;
         public Connecter(String name){//constructor for starting all service with our entity class
@@ -14,13 +12,13 @@ import javax.persistence.Persistence;
             accountService=new AccountService(this);//our first entity class
 //        orderService = new OrderService(this);//second entity class
         }
-        public void startTransaction(){//check to start a transaction
+        public void openTransaction(){//check to start a transaction
             if (!isManagerOpened()){//if entity manager null condition
                 manager = createEntityManager();//here we create an entity manager to fill or change data in the table
                 manager.getTransaction().begin();//we start transaction
             }
         }
-        public void endTransaction() throws RuntimeException{//we check to end our transaction
+        public void closeTransaction() throws RuntimeException{//we check to end our transaction
             if (isManagerOpened()){//work if connection not null
                 manager.getTransaction().commit();//saving all changes in dbms
                 manager.close();//close connection to dbms
