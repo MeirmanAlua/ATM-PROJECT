@@ -1,6 +1,5 @@
 import entity.Account;
 import entity.Validator;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -8,17 +7,14 @@ import java.util.Scanner; // library scanner
 
 public class ATM {
     public static void main(String[] args) {
-//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("atm");
-//        EntityManager manager = entityManagerFactory.createEntityManager();
-//        manager.getTransaction().begin();
-
-       // Account account10 = new Account(523456789, 1101, 10000);
-      //  manager.persist(account10);
-        // manager.getTransaction().commit();
-
+EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("atm");
+EntityManager manager = entityManagerFactory.createEntityManager();
+manager.getTransaction().begin();
+  //  Account account1 = new Account(51234467, 8888, 10000, "Anel", "Zholaman", 902);
+ // manager.persist(account1);
+ // manager.getTransaction().commit();
         Connecter connect = new Connecter("atm"); // create object to connect with class connecter
         connect.openTransaction(); // we start connection with db
-
         Scanner a = new Scanner(System.in); // first scanner to write the data in console
         int id; // new variable
         while (true) { // this loop will work infinitely until writing the existing id
@@ -29,7 +25,7 @@ public class ATM {
         }
         Account account = connect.getAccountService().find(id); // obtain account from the db
         if (account != null) { // if we do not find similar account in db, it will print the following statement
-            System.out.println("your account not find");
+            // System.out.println("your account found");
         Scanner b = new Scanner(System.in); // second scanner to enter the password
         System.out.println("Input password"); //if we find similar account in db, it will ask to enter the password
         int pass = b.nextInt();
@@ -67,9 +63,18 @@ public class ATM {
                         account.takeOn(sum); // work of method take on
                         connect.getAccountService().save(account); // save the changes in db
                     case 3:
-                        System.out.println("Please input the sum what you want send");
+                        System.out.println("Please input the sum what you want send (commission 150)");
                         System.out.println("From:");
-                        int from = a.nextInt(); // scanner to write the account of giver
+                        int from = a.nextInt();// scanner to write the account of giver
+                        Scanner d = new Scanner(System.in); // second scanner to enter the password
+                        System.out.println("Input cvv"); //if we find similar account in db, it will ask to enter the password
+                        int cvv = d.nextInt();
+                        if (account.checkCVV(cvv)) { // if checkPassword methods is true, it will print following
+                            System.out.println("Access granted"); }
+                            else {
+                                System.out.println("Incorrect cvv");
+                                break;
+                        }
                         System.out.println("To:");
                         int to = a.nextInt(); //scanner to write the address in input
                         System.out.println("Sum:");
@@ -83,13 +88,7 @@ public class ATM {
                     case 0:
                         System.exit(0); // stop the loop
                         break;
-//                     System.out.println("Do you want to continue? \n1 - Yes \n2 - No") {
-//                        Scanner qwer = new Scanner(System.in);
-//                        int q = qwer.nextInt();
-//                        if (q==1) return true
-//                        else if
-//                        (q == 2)  {System.exit(0);
-//                        }
+//
                 }
             }
         } else {

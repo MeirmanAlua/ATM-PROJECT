@@ -4,7 +4,7 @@ import javax.persistence.Persistence;
 
     public class Connecter {//main class for starting all services
         private final EntityManagerFactory managerFactory;
-        private EntityManager manager;//    private final CustomerService customerService;
+        private EntityManager manager;//    private final account services;
 //    private final OrderService orderService;
         private final AccountService accountService;
         public Connecter(String name){//constructor for starting all service with our entity class
