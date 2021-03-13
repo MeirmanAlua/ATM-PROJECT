@@ -8,21 +8,23 @@ import javax.persistence.Id;
 public class Account { // create class Account
 
     @Id
-    private Long id; // new variable
+    private Integer id; // new variable
 
     private Integer password; // new variable
     private Integer cash;  // new variable
     private String fn; // new variable
     private String sn;// new variable
+    private Integer cvv;
 
     public Account() { }// default constructor
 
-    public Account(long id, int pass, int cash, String fn, String sn) { //constructor to include the personal information for new account
+    public Account(int id, int pass, int cash, String fn, String sn, int cvv) { //constructor to include the personal information for new account
         this.id = id;
         this.password = pass;
         this.cash = cash;
         this.fn= fn;
         this.sn= sn;
+        this.cvv=cvv;
 
     }
 
@@ -34,6 +36,16 @@ public class Account { // create class Account
             return false; // other cases, it won't work.
         }
     }
+    public boolean checkCVV(int cvv) { // method checkPassword for checking the password of an account
+        if (this.cvv == cvv) { // if password is identical with password given in db, it will work.(if else statement)
+            return true;
+        }
+        else{
+            return false; // other cases, it won't work.
+        }
+    }
+
+
 
     public int takeOff(int sum){ // method takeOff to get money
         int res;
