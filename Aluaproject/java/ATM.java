@@ -10,38 +10,52 @@ public class ATM {
 EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("atm");
 EntityManager manager = entityManagerFactory.createEntityManager();
 manager.getTransaction().begin();
-  //  Account account1 = new Account(51234467, 8888, 10000, "Anel", "Zholaman", 902);
- // manager.persist(account1);
- // manager.getTransaction().commit();
+
+//______
+//Account account2 = new Account ();// first method to input the Data to db
+//account2.inputData();
+//manager.persist(account2);
+//manager.getTransaction().commit();
+
+//_____
+//Account account1 = new Account(51234467, 8888, 10000, "Anel", "Zholaman", 902); second method to input the Data to db
+//manager.persist(account1);
+//manager.getTransaction().commit();
         Connecter connect = new Connecter("atm"); // create object to connect with class connecter
         connect.openTransaction(); // we start connection with db
         Scanner a = new Scanner(System.in); // first scanner to write the data in console
         int id; // new variable
-        while (true) { // this loop will work infinitely until writing the existing id
+        while (true)
+        { // this loop will work infinitely until writing the existing id
             System.out.println("Input account id");
             id = a.nextInt();
             if (Validator.validateCardNumber(id)) // using validateCardNumber method
                 break;
         }
         Account account = connect.getAccountService().find(id); // obtain account from the db
-        if (account != null) { // if we do not find similar account in db, it will print the following statement
+        if (account != null)
+        { // if we do not find similar account in db, it will print the following statement
             // System.out.println("your account found");
         Scanner b = new Scanner(System.in); // second scanner to enter the password
         System.out.println("Input password"); //if we find similar account in db, it will ask to enter the password
         int pass = b.nextInt();
 
-        if (account.checkPassword(pass)) { // if checkPassword methods is true, it will print following
+        if (account.checkPassword(pass))
+        { // if checkPassword methods is true, it will print following
             System.out.println("Access granted");
 
-            while (true) { // this loop will work infinitely until writing 0;
+            while (true)
+            { // this loop will work infinitely until writing 0;
                 System.out.println("Choose something\n1 - Withdraw money\n2 - Take on money\n3 - Make Transaction\n0 - Exit");
                 int choice = a.nextInt(); // choose the needed service
                 //-----------------------
-                switch (choice) { // open switch cass
+                switch (choice)
+                { // open switch cass
                     case 1: // if our choice is 1, we can get money from account in db
                         Scanner c = new Scanner(System.in);  // declaring third scanner
                         int sum;
-                        while (true) { // this loop will work infinitely until sum will be more than 0
+                        while (true)
+                        { // this loop will work infinitely until sum will be more than 0
                             System.out.println("Please input the sum what you want take off");
                             sum = c.nextInt(); //to write the quantity of money
                             if (sum > 0)
@@ -52,7 +66,8 @@ manager.getTransaction().begin();
                         connect.getAccountService().save(account); // save the changes in db
                         break;
                     case 2: // next case
-                        while (true) { //this loop will work infinitely until sum will be more than 0
+                        while (true)
+                        { //this loop will work infinitely until sum will be more than 0
                             Scanner d = new Scanner(System.in); // declaring 4th scanner
                             System.out.println("Please input the sum what you want take on");
                             sum = d.nextInt(); // to write in input the quantity of money to put
@@ -69,12 +84,15 @@ manager.getTransaction().begin();
                         Scanner d = new Scanner(System.in); // second scanner to enter the password
                         System.out.println("Input cvv"); //if we find similar account in db, it will ask to enter the password
                         int cvv = d.nextInt();
-                        if (account.checkCVV(cvv)) { // if checkPassword methods is true, it will print following
-                            System.out.println("Access granted"); }
-                            else {
+                        if (account.checkCVV(cvv))
+                        { // if checkPassword methods is true, it will print following
+                            System.out.println("Access granted");
+                        }
+                            else
+                                {
                                 System.out.println("Incorrect cvv");
                                 break;
-                        }
+                                }
                         System.out.println("To:");
                         int to = a.nextInt(); //scanner to write the address in input
                         System.out.println("Sum:");
@@ -93,10 +111,13 @@ manager.getTransaction().begin();
             }
         } else {
             System.out.println("Access denied"); // other cases, access denied
-        }  }
+        }
+        }
          else {
             System.out.println("account with that id not found"); // other cases, account with that id not found
-        }  connect.closeTransaction(); } } // close connection and stop program
+        }   connect.closeTransaction();
+    }
+} // close connection and stop program
 
 
 
