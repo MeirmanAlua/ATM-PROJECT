@@ -76,7 +76,8 @@ manager.getTransaction().begin();
                             System.out.println("Incorrect input"); // if number is less than 0, it will print this statement
                         }
                         account.takeOn(sum); // work of method take on
-                        connect.getAccountService().save(account); // save the changes in db
+                        connect.getAccountService().save(account);
+                        break;// save the changes in db
                     case 3:
                         System.out.println("Please input the sum what you want send (commission 150)");
                         System.out.println("From:");
@@ -113,11 +114,11 @@ manager.getTransaction().begin();
             System.out.println("Access denied"); // other cases, access denied
         }
         }
-         else {
-            System.out.println("account with that id not found"); // other cases, account with that id not found
-        }   connect.closeTransaction();
+         else
+        {System.out.println("account with that id not found"); // other cases, account with that id not found
+            connect.closeTransaction();
     }
-} // close connection and stop program
+}  }// close connection and stop program
 
 
 
