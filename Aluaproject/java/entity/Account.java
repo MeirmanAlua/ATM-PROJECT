@@ -11,14 +11,18 @@ public class Account { // create class Account
     private Long id; // new variable
 
     private Integer password; // new variable
-    private Integer cash; // new variable
+    private Integer cash;  // new variable
+    private String fn; // new variable
+    private String sn;// new variable
 
     public Account() { }// default constructor
 
-    public Account(long id, int pass, int cash) { //constructor to include the personal information for new account
+    public Account(long id, int pass, int cash, String fn, String sn) { //constructor to include the personal information for new account
         this.id = id;
         this.password = pass;
         this.cash = cash;
+        this.fn= fn;
+        this.sn= sn;
 
     }
 
